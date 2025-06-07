@@ -1,26 +1,25 @@
 const Koa = require("koa");
 // const koaBody = require("koa-body").default;
 const admin = require("firebase-admin");
-const cors = require('@koa/cors');
+const cors = require("@koa/cors");
 const serviceAccount = require("../serviceAccount.json");
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert(serviceAccount),
 });
 
 const corsOptions = {
-  origin: '*',
+  origin: "http://localhost:3000",
   credentials: true,
-  allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowHeaders: ['Content-Type', 'Authorization'],
-  exposeHeaders: ['Access-Control-Allow-Origin']
+  allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowHeaders: ["Content-Type", "Authorization"],
+  exposeHeaders: ["Access-Control-Allow-Origin"],
 };
 
 const routes = require("./routes/routes");
 const app = new Koa();
 app.use(cors(corsOptions));
 
-// Middleware gán body từ req.body (Firebase Functions đã parse sẵn)
 app.use(async (ctx, next) => {
   if (ctx.req.body) {
     ctx.request.body = ctx.req.body;

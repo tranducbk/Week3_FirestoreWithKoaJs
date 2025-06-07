@@ -1,13 +1,13 @@
-const Router = require('koa-router');
-const todoController = require('../controller/todoController');
+const Router = require("koa-router");
+const todoController = require("../handler/todoController");
 
 const router = new Router({
-    prefix: "/api",
-  });
+  prefix: "/api",
+});
 
-router.get('/todos', todoController.getTodos);
-router.post('/todos', todoController.createTodo);
-router.put('/todos/:id', todoController.updateTodo);
-router.delete('/todos/:id', todoController.deleteTodo);
+router.get("/todos", todoController.handlerGetTodos);
+router.post("/todos", todoController.handlerCreateTodo);
+router.put("/todos/:id", todoController.handlerUpdateTodo);
+router.delete("/todos/:id", todoController.handlerDeleteTodo);
 
-module.exports = router; 
+module.exports = router;
