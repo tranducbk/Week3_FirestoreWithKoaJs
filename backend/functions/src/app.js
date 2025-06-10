@@ -18,7 +18,9 @@ const corsOptions = {
 
 const routes = require("./routes/routes");
 const app = new Koa();
+
 app.use(cors(corsOptions));
+// app.use(koaBody());
 
 app.use(async (ctx, next) => {
   if (ctx.req.body) {
